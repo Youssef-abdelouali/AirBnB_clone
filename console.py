@@ -2,7 +2,7 @@
 """HolbertonBnB console for managing objects."""
 import cmd
 import re
-from shlex import split
+from shlex import split 
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -15,24 +15,24 @@ from models.review import Review
 
 def parse_input(arg):
     """Parse the input arguments."""
-    curly_braces_match = re.search(r"\{(.*?)\}", arg)
-    brackets_match = re.search(r"\[(.*?)\]", arg)
-    if curly_braces_match is None:
-        if brackets_match is None:
+    Curly_Braces_Match = re.search(r"\{(.*?)\}", arg)
+    Brac_kets_Match = re.search(r"\[(.*?)\]", arg)
+    if Curly_Braces_Match is None:
+        if Brac_kets_Match is None:
             return [i.strip(",") for i in split(arg)]
         else:
-            lexer = split(arg[:brackets_match.span()[0]])
-            result_list = [i.strip(",") for i in lexer]
-            result_list.append(brackets_match.group())
+            Lex_er_ = split(arg[:Brac_kets_Match.span()[0]])
+            result_list = [i.strip(",") for i in Lex_er_]
+            result_list.append(Brac_kets_Match.group())
             return result_list
     else:
-        lexer = split(arg[:curly_braces_match.span()[0]])
-        result_list = [i.strip(",") for i in lexer]
-        result_list.append(curly_braces_match.group())
+        Lex_er_ = split(arg[:Curly_Braces_Match.span()[0]])
+        result_list = [i.strip(",") for i in Lex_er_]
+        result_list.append(Curly_Braces_Match.group())
         return result_list
 
 
-class HBNBConsole(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     """HolbertonBnB command line interpreter.
 
     Attributes:
@@ -92,10 +92,10 @@ class HBNBConsole(cmd.Cmd):
         arg_list = parse_input(arg)
         if len(arg_list) == 0:
             print("** class name missing **")
-        elif arg_list[0] not in HBNBConsole.__classes:
+        elif arg_list[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            new_instance = HBNBConsole.__classes[arg_list[0]]()
+            new_instance = HBNBCommand.__classes[arg_list[0]]()
             new_instance.save()
             print(new_instance.id)
 
@@ -108,7 +108,7 @@ class HBNBConsole(cmd.Cmd):
         obj_dict = storage.all()
         if len(arg_list) == 0:
             print("** class name missing **")
-        elif arg_list[0] not in HBNBConsole.__classes:
+        elif arg_list[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(arg_list) == 1:
             print("** instance id missing **")
@@ -126,7 +126,7 @@ class HBNBConsole(cmd.Cmd):
         obj_dict = storage.all()
         if len(arg_list) == 0:
             print("** class name missing **")
-        elif arg_list[0] not in HBNBConsole.__classes:
+        elif arg_list[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(arg_list) == 1:
             print("** instance id missing **")
@@ -142,7 +142,7 @@ class HBNBConsole(cmd.Cmd):
         Usage: all or all <class> or <class>.all()
         """
         arg_list = parse_input(arg)
-        if len(arg_list) > 0 and arg_list[0] not in HBNBConsole.__classes:
+        if len(arg_list) > 0 and arg_list[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
             obj_list = []
@@ -178,7 +178,7 @@ class HBNBConsole(cmd.Cmd):
         if len(arg_list) == 0:
             print("** class name missing **")
             return False
-        if arg_list[0] not in HBNBConsole.__classes:
+        if arg_list[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return False
         if len(arg_list) == 1:
@@ -215,6 +215,5 @@ class HBNBConsole(cmd.Cmd):
                     obj.__dict__[x] = y
         storage.save()
 
-
 if __name__ == "__main__":
-    HBNBConsole().cmdloop()
+    HBNBCommand().cmdloop()
