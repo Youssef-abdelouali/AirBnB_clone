@@ -37,7 +37,7 @@ class Test_HBNB_Command_help(unittest.TestCase):
     """Unittests for testing help messages of the HBNB Comm_and_ interpreter."""
 
     def test_for_help_quit_command(self):
-        Hel__p = "Quit Comm_and_ to exit the program."
+        Hel__p = "Quit Command to exit the program."
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help quit"))
             self.assertEqual(Hel__p, output.getvalue().strip())
@@ -50,7 +50,7 @@ class Test_HBNB_Command_help(unittest.TestCase):
             self.assertEqual(Hel__p, output.getvalue().strip())
 
     def test_for_help_EOF_command(self):
-        Hel__p = "Signal to exit the program upon reaching EOF.."
+        Hel__p = "Signal to exit the program upon reaching EOF."
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help EOF"))
             self.assertEqual(Hel__p, output.getvalue().strip())
